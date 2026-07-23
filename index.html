@@ -238,11 +238,25 @@ table.dt tbody tr:last-child td { border-bottom:none; }
   <!-- ═══ SUPABASE (SaaS) ═══ -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script>
-    // ⚠️ Clés PUBLIQUES uniquement (anon key). Ne jamais mettre la service_role_key ici.
-    const SUPABASE_URL = 'https://xeerwmpowlcwdfhhbwez.supabase.co';
-    const SUPABASE_ANON_KEY = 'COLLER_ICI_VOTRE_ANON_KEY';
-    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-  </script>
+const SUPABASE_URL = "https://ofiokdrdybmhremdovxs.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_P5ozo1EZqw25NOuh4BSOgw_isWvlq2x";
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+);
+async function testConnexion() {
+    const { data, error } = await supabaseClient.auth.getSession();
+
+    if (error) {
+        console.error("❌ Erreur :", error);
+    } else {
+        console.log("✅ Connexion Supabase réussie");
+        console.log(data);
+    }
+}
+
+testConnexion();
+</script>
 </head>
 <body>
 
