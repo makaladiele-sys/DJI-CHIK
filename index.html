@@ -1069,12 +1069,13 @@ const { data: profile, error } = await supabaseClient
 console.log("ID connecté :", user.id);
 console.log("Profil :", profile);
 console.log("Erreur :", error);
-
-if(error || !profile){
-    showLoginError('errMsg','Profil introuvable. Contactez votre administrateur.');
+if (error || !profile) {
+    console.log("❌ On entre dans le if");
+    showLoginError('errMsg', 'Profil introuvable. Contactez votre administrateur.');
     await supabaseClient.auth.signOut();
     return;
 }
+console.log("✅ Le profil est valide, on continue...");
   if(profile.status === 'invitation_en_attente' || !profile.organization_id){
     showConnexion();
     showLoginError('errMsg','Votre compte existe mais n\'est rattaché à aucun atelier. Utilisez votre code d\'invitation.');
@@ -1982,4 +1983,3 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 
 </body></html>
-
