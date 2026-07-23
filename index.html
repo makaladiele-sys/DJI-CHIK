@@ -1060,19 +1060,21 @@ function doLoginInvite(){
 async function loadProfileAndEnterApp(){
   const { data: { user } } = await supabaseClient.auth.getUser();
   if(!user){ showLoginError('errMsg','Session introuvable, reconnectez-vous.'); return; }
-
-  const { data: profile, error } = await supabaseClient
+const { data: profile, error } = await supabaseClient
     .from('profiles')
     .select('*')
     .eq('id', user.id)
     .single();
 
-  if(error || !profile){
+console.log("ID connecté :", user.id);
+console.log("Profil :", profile);
+console.log("Erreur :", error);
+
+if(error || !profile){
     showLoginError('errMsg','Profil introuvable. Contactez votre administrateur.');
     await supabaseClient.auth.signOut();
     return;
-  }
-
+}
   if(profile.status === 'invitation_en_attente' || !profile.organization_id){
     showConnexion();
     showLoginError('errMsg','Votre compte existe mais n\'est rattaché à aucun atelier. Utilisez votre code d\'invitation.');
@@ -1980,3 +1982,4 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 
 </body></html>
+
